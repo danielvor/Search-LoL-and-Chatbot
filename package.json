@@ -1,0 +1,17 @@
+{
+  "name": "projeto-buscar-jogadores-lol",
+  "version": "1.0.0",
+  "description": "Site que retorna inforções de um jogador de LoL",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniel Rodrigues",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.3",
+    "express": "^4.18.2"
+  }
+}

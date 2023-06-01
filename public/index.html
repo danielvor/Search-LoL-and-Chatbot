@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>
+    <title>League of Legends Player Stats</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>League of Legends Player Stats</h1>
+      <div>
+        <input type="text" id="summonerInput" placeholder="Summoner Name" />
+        <button onclick="getSummonerStats()">Search</button>
+      </div>
+      <div id="playerStats" class="player-stats"></div>
+      <div class="chart-container">
+        <canvas id="winRateChart"></canvas>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,2 +1,2 @@
-# lol-player-research
-Um app que fornece dados significativos de um jogador do League of Legends.
+# Projeto Buscar Jogadores LoL
+Um app que retorna informações de um jogador do League of Legends.
