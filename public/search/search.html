@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projeto Buscar Jogador LoL | Dashboards</title>
+
+  <link rel="stylesheet" href="../css/search.css">
+  <script src="../js/sessao.js"></script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <!-- scripts do Chart.js - 2022-1 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!--FONT AWESOME-->
+  <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+</head>
+
+<body onload="validarSessao()">
+
+  <div class="janela">
+    <div class="header-left">
+      <h1>Projeto Buscar Jogador LoL</h1>
+      <div class="hello">
+        <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+      </div>
+      <div class="btn-logout" onclick="limparSessao()">
+        <h3>Sair</h3>
+      </div>
+    </div>
+  </div>
+    <div class="dash">
+      <div class="container-search">
+        <h1>League of Legends Player Stats</h1>        
+          <input type="text" id="summonerInput" placeholder="Summoner Name" />
+          <button onclick="getSummonerStats()">Search</button>        
+        <div id="playerStats" class="player-stats"></div>
+        <div class="chart-container">
+          <canvas id="winRateChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <button id="chat-button"><i class="fas fa-comment"></i></button>
+
+    <div id="chat-box">
+      <button class="close-button" id="close-button">&times;</button>
+      <div id="chat-messages"></div>
+      <input type="text" id="user-input" placeholder="Digite sua mensagem..." />
+      <button id="send-button">Enviar</button>
+    </div>
+</body>
+
+<script>
+  const chatButton = document.getElementById('chat-button');
+  const chatBox = document.getElementById('chat-box');
+  const closeButton = document.getElementById('close-button');
+  const chatMessages = document.getElementById('chat-messages');
+  const userInput = document.getElementById('user-input');
+  const sendButton = document.getElementById('send-button');
+
+  let isFirstQuestion = true;
+  let questionCount = 0;
+
+  function addMessageToChat(message, sender) {
+    const chatMessage = document.createElement('div');
+    chatMessage.classList.add('message');
+    chatMessage.classList.add(sender);
+    chatMessage.innerText = message;
+    chatMessages.appendChild(chatMessage);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function sendMessage() {
+    const message = userInput.value;
+    if (message !== '') {
+      addMessageToChat(message, 'user');
+      userInput.value = '';
+
+      if (isFirstQuestion) {
+        const Resposta = `Olá, eu sou guinti, qual é o seu nome?`;
+        isFirstQuestion = false;
+        setTimeout(() => {
+          addMessageToChat(Resposta, 'bot');
+        }, 500);
+      } else {
+        questionCount++;
+        switch (questionCount) {
+          case 1:
+            const name = message.charAt(0).toUpperCase() + message.slice(1);
+            const Resposta = `Oi, ${name}! Belo nome. Onde você mora?`;
+            setTimeout(() => {
+              addMessageToChat(Resposta, 'bot');
+            }, 500);
+            break;
+          case 2:
+            const place = message.charAt(0).toUpperCase() + message.slice(1);
+            const Resposta2 = `${place} é um lugar lindo! O que você gosta de fazer lá?`;
+            setTimeout(() => {
+              addMessageToChat(Resposta2, 'bot');
+            }, 500);
+            break;
+          case 3:
+            const activity = message.charAt(0).toUpperCase() + message.slice(1);
+            const Resposta3 = `Legal! Eu também gosto de ${activity}. Qual é o seu hobby favorito?`;
+            setTimeout(() => {
+              addMessageToChat(Resposta3, 'bot');
+            }, 500);
+            break;
+          case 4:
+            const hobby = message.charAt(0).toUpperCase() + message.slice(1);
+            const Resposta4 = `Interessante! ${hobby} é uma ótima maneira de passar o tempo. Você pratica algum esporte?`;
+            setTimeout(() => {
+              addMessageToChat(Resposta4, 'bot');
+            }, 500);
+            break;
+          case 5:
+            const sport = message.charAt(0).toUpperCase() + message.slice(1);
+            const Resposta5 = `Legal! ${sport} é uma atividade saudável. Se tiver mais alguma pergunta, é só falar!`;
+            setTimeout(() => {
+              addMessageToChat(Resposta5, 'bot');
+            }, 500);
+            break;
+          default:
+            const fallbackResposta = "Desculpe, não entendi. Poderia repetir?";
+            setTimeout(() => {
+              addMessageToChat(fallbackResposta, 'bot');
+            }, 500);
+            break;
+        }
+      }
+    }
+  }
+
+  function closeChat() {
+    chatBox.style.display = 'none';
+    chatButton.style.display = 'block';
+    chatMessages.innerHTML = '';
+    userInput.value = '';
+    isFirstQuestion = true;
+    questionCount = 0;
+  }
+
+  chatButton.addEventListener('click', () => {
+    chatButton.style.display = 'none';
+    chatBox.style.display = 'block';
+    userInput.focus();
+  });
+
+  closeButton.addEventListener('click', () => {
+    closeChat();
+  });
+
+  sendButton.addEventListener('click', () => {
+    sendMessage();
+  });
+
+  userInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      sendMessage();
+    }
+  });
+</script>
+
+</html>
