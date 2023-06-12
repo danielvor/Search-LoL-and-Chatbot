@@ -7,3 +7,4 @@ site/node_modules
 site/package-lock.json
 
 .github
+.env
