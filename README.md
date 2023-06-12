@@ -30,14 +30,14 @@ No terminal, de um diretório específico:
 
 **1. Clone o repositório localmente usando o comando**: 
 ```
-git clone tps://github.com/danielvor/Search-LoL-and-Chatbot.git
-```
-
-**2. Instale as dependência **:
-```
-npm i
+git clone https://github.com/danielvor/Search-LoL-and-Chatbot.git
 ```
     
+**2. Instale as dependências**:
+```
+npm install
+```
+
 **3. Abre a página em seu navegador**:
 ```
 npm start
